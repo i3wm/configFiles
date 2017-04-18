@@ -1,0 +1,18 @@
+To apply fonts globally:
+
+1.	Copy the fonts to '/usr/share/fonts/<any-name>'.
+
+2.	Then, type the following command to update the cache:
+
+###
+fc-cache -fv
+###
+
+3.	Then choose the fonts from 'lxappearance'.
+
+4.	If the fonts are not availabe from 'lxappearance', then edit the following files with your desired font.
+
+###
+~/.gtkrc-2.0
+~/.config/gtk-3.0/settings.ini
+###

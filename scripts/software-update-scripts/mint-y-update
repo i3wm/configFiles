@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Message
+printf '\nChecking for updates . . .\n'
+
+# For GTK Theme
+sleep 1
+cd $HOME/git/mint-y-theme/
+sleep 1
+CHECK1=`git ls-remote origin | grep HEAD | awk '{print $1}' | head -n1`
+
+if [[ `echo $CHECK1` == `cat $HOME/update-check/mint-y-theme` ]]; then
+	sleep 1
+	printf '\nGTK theme is already the latest\n'
+	sleep 1
+	echo -n "$CHECK1"
+else
+	sleep 1
+	printf '\nUpdating GTK theme . . .\n'
+	sleep 1
+	echo -n "$CHECK1"
+	sleep 1
+	cd $HOME/git/mint-y-theme/usr/share/themes/
+	sleep 1
+	git pull origin master
+	
+	# Accept password
+	echo -n 'Enter your root password: '
+	read -s passwd
+	echo "Password accepted."
+	
+	sleep 1
+	echo $passwd | sudo -S echo " "
+	sudo cp -r Mint-Y Mint-Y-Dark Mint-Y-Darker /usr/share/themes/
+	sudo -K
+	echo "$CHECK1" > $HOME/update-check/mint-y-theme
+fi
+
+printf '\n\nMint Y theme updated!\n'

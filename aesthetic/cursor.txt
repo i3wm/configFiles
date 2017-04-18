@@ -1,0 +1,16 @@
+1.	Copy the custom cursor folder to '/usr/share/icons/'
+
+2.	In the above folder there should be a folder called 'default', cd into that.
+
+3.	In 'default', there is a file 'index.theme'.
+
+4.	The contents of the file should be something like:
+
+###
+[Icon Theme]
+Inherits=ComixCursors-White
+###
+
+5.	Change the inherits value to whatever is your custom cursor theme name.
+
+6.	Next, open 'lxappearance' and under 'Mouse Cursor' tab choose your cusror theme and click on 'Apply'.

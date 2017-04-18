@@ -1,0 +1,130 @@
+#!/bin/bash
+
+# Message
+printf '\nChecking for updates . . .\n'
+
+# For Icon Theme
+sleep 1
+cd $HOME/git/papirus/papirus-icon-theme/
+sleep 1
+CHECK1=`git ls-remote origin | grep HEAD | awk '{print $1}' | head -n1`
+
+# For Libreoffice Theme
+sleep 1
+cd $HOME/git/papirus/papirus-libreoffice-theme/
+sleep 1
+CHECK2=`git ls-remote origin | grep HEAD | awk '{print $1}' | head -n1`
+
+# For K3b theme
+#sleep 1
+#cd $HOME/git/papirus/papirus-k3b-theme
+#sleep 1
+#CHECK3=`git ls-remote origin | grep HEAD | awk '{print $1}' | head -n1`
+
+# For Smplayer theme
+sleep 1
+cd $HOME/git/papirus/papirus-smplayer-theme/
+sleep 1
+CHECK4=`git ls-remote origin | grep HEAD | awk '{print $1}' | head -n1`
+
+if [[ `echo $CHECK1` == `cat $HOME/update-check/papirus-icon-theme` ]]; then
+	sleep 1
+	printf '\nGTK icon theme is already the latest\n'
+	sleep 1
+	echo -n "$CHECK1"
+else
+	sleep 1
+	printf '\nUpdating GTK icon theme . . .\n'
+	sleep 1
+	echo -n "$CHECK1"
+	sleep 1
+	cd $HOME/git/papirus/papirus-icon-theme/
+	sleep 1
+	git pull origin master
+	
+	# Accept password
+	echo -n 'Enter your root password: '
+	read -s passwd
+	echo "Password accepted."
+	
+	sleep 1
+	echo $passwd | sudo -S echo " "
+	sudo cp -r Papirus /usr/share/icons/
+	sudo -K
+	echo "$CHECK1" > $HOME/update-check/papirus-icon-theme
+fi
+
+if [[ `echo $CHECK2` == `cat $HOME/update-check/papirus-libreoffice-theme` ]]; then
+	sleep 1
+	printf '\n\nLibreoffice theme is already the latest\n'
+	sleep 1
+	echo -n "$CHECK2"
+else
+	sleep 1
+	printf '\nUpdating Libreoffice theme . . .\n'
+	sleep 1
+	echo -n "$CHECK2"
+	sleep 1
+	cd $HOME/git/papirus/papirus-libreoffice-theme/
+	sleep 1
+	git pull origin master
+	sleep 1
+	echo $passwd | sudo -S echo " "
+	sudo cp -r images_papirus.zip /usr/share/libreoffice/share/config/images_papirus.zip
+	sleep 1
+	sudo cp -r images_papirus_dark.zip /usr/share/libreoffice/share/config/images_papirus_dark.zip
+	sleep 1
+	sudo ln -s /usr/share/libreoffice/share/config/images_papirus.zip /usr/lib/libreoffice/share/config/images_papirus.zip
+	sleep 1
+	sudo ln -s /usr/share/libreoffice/share/config/images_papirus_dark.zip /usr/lib/libreoffice/share/config/images_papirus_dark.zip
+	sleep 1
+	sudo chmod -R 755 /usr/share/libreoffice/share/config/images_papiru*
+	sudo -K
+	echo "$CHECK2" > $HOME/update-check/papirus-libreoffice-theme
+fi
+
+#if [[ `echo $CHECK3` == `cat $HOME/update-check/papirus-k3b-theme-master` ]]; then
+#	sleep 1
+#	printf '\n\nK3B theme is already the latest\n'
+#	sleep 1
+#	echo -n "$CHECK3"
+#else
+#	sleep 1
+#	printf '\nUpdating K3B theme . . .\n'
+#	sleep 1
+#	echo -n "$CHECK3"
+#	sleep 1
+#	cd $HOME/git/papirus/papirus-k3b-theme/
+#	sleep 1
+#	git pull origin master
+#	sleep 1
+#	echo $passwd | sudo -S echo " "
+#	sudo cp -R /tmp/papirus-k3b-theme-master/Papirus /usr/share/k3b/pics/
+#	sleep 1
+#	sudo chmod -R 755 /usr/share/k3b/pics/Papirus
+#	sudo -K
+#	echo "$CHECK3" > $HOME/update-check/papirus-k3b-theme-master
+#fi
+
+if [[ `echo $CHECK4` == `cat $HOME/update-check/papirus-smplayer-theme` ]]; then
+	sleep 1
+	printf '\n\nSmplayer theme is  already the latest\n'
+	sleep 1
+	echo -n "$CHECK4"
+else
+	sleep 1
+	printf '\nUpdating Smplayer theme . . .\n'
+	sleep 1
+	echo -n "$CHECK4"
+	sleep 1
+	cd $HOME/git/papirus/papirus-smplayer-theme/
+	sleep 1
+	git pull origin master
+	sleep 1
+	echo $passwd | sudo -S echo " "
+	sudo cp -r Papirus /usr/share/smplayer/themes/
+	sudo -K
+	echo "$CHECK4" >  $HOME/update-check/papirus-smplayer-theme
+fi
+
+printf '\n\nPapirus pack updated!\n'

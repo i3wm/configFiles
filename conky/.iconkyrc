@@ -1,0 +1,56 @@
+background no
+out_to_console yes
+out_to_x no
+max_text_width 0
+own_window no
+update_interval 0.1
+total_run_times 0
+short_units yes
+if_up_strictness address
+use_spacer right
+override_utf8_locale no
+cpu_avg_samples 2
+
+TEXT
+[
+	#Capslock & Numlock
+		{"full_text":" A","color":"\#B46868","separator":false,"separator_block_width":6},
+                {"full_text":"[${exec xset -q | grep Caps | awk '/00/ {print $4}'}]","color":"\#808080","separator":false,"separator_block_width":6},
+
+		{"full_text":" 1","color":"\#B46868","separator":false,"separator_block_width":6},
+                {"full_text":"[${exec xset -q | grep Caps | awk '/00/ {print $8}'}]","color":"\#808080","separator":false,"separator_block_width":6},
+
+	#Wifi
+#		${if_existing /sys/class/net/wlan0}
+#			{"full_text":" ","color":"\#00FF00","separator":false,"separator_block_width":6},
+#			{"full_text":"[${exec cat '/home/rexdrive/Scripts/wifi-state'} ${wireless_link_qual_perc wlan0}%]","color":"\#808080","separator":false,"separator_block_width":6},
+			#{"full_text": "[${wireless_link_bar wlan0}] ", "color":"\#00FF00", "separator": false, "separator_block_width":6},
+#		${endif}
+
+	#Finds current volume. May need modified depending on your setup
+		{"full_text":" ","color":"\#268BD2","separator":false,"separator_block_width":6},
+		{"full_text":"[${exec bash $HOME/Scripts/volume.sh}]","color":"\#808080","separator":false,"separator_block_width":6},
+		#{"full_text": " : ${exec amixer -c 0 get Master | grep Mono: | cut -d " " -f6} ", "color":"\#268BD2"},
+
+	#Brightness
+		{"full_text":" ","color":"\#F7FE2E","separator":false,"separator_block_width":6},
+		{"full_text":"[${exec cat '/sys/class/backlight/eeepc/brightness'}] ","color":"\#808080","separator":false,"separator_block_width":6},
+		#{ "full_text": ": ${exec cat '/sys/class/backlight/eeepc/brightness'}% ", "color":"\#F7FE2E"},
+
+	#CPU
+#		{"full_text":" ","color":"\#8D00FF","separator":false,"separator_block_width":6},\
+#		{"full_text":"[$cpu%]","color":"\#808080","separator":false,"separator_block_width":6},\
+		#{"full_text": " :[$cpu%] ", "color":"\#8D00FF", "separator": false, "separator_block_width":6},\
+
+	#Battery 
+		{"full_text":" ","color":"\#FF0000","separator":false,"separator_block_width":6},
+		{"full_text":"[${exec bash $HOME/Scripts/battery-state.sh} ${battery_percent BAT0}% ${exec bash $HOME/Scripts/battery-full.sh}]","color":"\#808080","separator":false,"separator_block_width":6},
+		#{"full_text": ":[${battery_percent BAT1}%] ","color":"\#dedede"},
+
+	#Calender/time
+		{"full_text":" ","color":"\#2E9AFE","separator":false,"separator_block_width":6},
+		{"full_text":"${time %a %b %d}","color":"\#808080","separator":false},
+		#{"full_text": " :${time %a %d %b} ${time %H:%M:%S} ","color": "\#2E9AFE", "separator": false},
+		{"full_text":" ","color":"\#20b2aa","separator":false,"separator_block_width":6},
+		{"full_text":"${time %I:%M %p} ","color":"\#808080","separator":false}
+],

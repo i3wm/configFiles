@@ -1,0 +1,446 @@
+# It will not be overwritten, so edit it as you like.
+#
+# Should you change your keyboard layout some time, delete
+# this file and re-run i3-config-wizard(1).
+#
+
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango: DejaVu Sans Bold 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+t exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher) dmenu_run
+bindsym $mod+d exec rofi -show run -config '~/.local/rofi/config'
+# Mint Y theme
+# bindsym $mod+d exec rofi -show run -opacity "75" -location 6 -seperator-style none -font "Arial 14" -config '~/.local/rofi/config'
+
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Name the workspaces
+set $workspace1 "1: Terminal  "
+set $workspace2 "2: Browser  " 
+set $workspace3 "3: Office  "
+set $workspace4 "4: IDE  "
+set $workspace5 "5: Video  "
+set $workspace6 "6. Editor  "
+set $workspace7 "7. File Manager  "
+set $workspace8 "8: Torrent  "
+set $workspace9 "9: Music  "
+set $workspace10 "10. PDF  "
+set $workspace11 "11: TeamViewer  "
+set $workspace12 "12: RSS  "
+set $workspace13 "13: Scratchpad  "
+set $workspace14 "14: Graphics  "
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+bindsym $mod+F1 workspace $workspace11 
+bindsym $mod+F2 workspace $workspace12 
+bindsym $mod+F3 workspace $workspace13 
+bindsym $mod+F4 workspace $workspace14 
+bindsym $mod+F5 workspace 15 
+#$workspace15
+bindsym $mod+F6 workspace 16 
+#$workspace16
+bindsym $mod+F7 workspace 17 
+#$workspace17
+bindsym $mod+F8 workspace 18 
+#$workspace18
+bindsym $mod+F9 workspace 19 
+#$workspace19
+bindsym $mod+F10 workspace 20 
+#$workspace20
+bindsym $mod+F11 workspace 21 
+#$workspace21
+bindsym $mod+F12 workspace 22 
+#$workspace22
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+F1 move container to workspace $workspace11 
+bindsym $mod+Shift+F2 move container to workspace $workspace12 
+bindsym $mod+Shift+F3 move container to workspace $workspace13 
+bindsym $mod+Shift+F4 move container to workspace $workspace14 
+bindsym $mod+Shift+F5 move container to workspace 15 
+#$workspace15
+bindsym $mod+Shift+F6 move container to workspace 16 
+#$workspace16
+bindsym $mod+Shift+F7 move container to workspace 17 
+#$workspace17
+bindsym $mod+Shift+F8 move container to workspace 18 
+#$workspace18
+bindsym $mod+Shift+F9 move container to workspace 19 
+#$workspace19
+bindsym $mod+Shift+F10 move container to workspace 20 
+#$workspace20
+bindsym $mod+Shift+F11 move container to workspace 21 
+#$workspace21
+bindsym $mod+Shift+F12 move container to workspace 22 
+#$workspace22
+
+# Stick windows to workspace
+# workspace2:- Browser
+assign [class="Firefox"] $workspace2
+#assign [class="chromium-browser"] $workspace2
+# for versions > 50.* (in debian & arch)
+assign [class="Chromium"] $workspace2
+# for versions <= 50.* or ubuntu
+assign [class="Pale moon"] $workspace2
+assign [class="QupZilla"] $workspace2
+assign [class="Midori"] $workspace2
+# workspace3:- Office
+assign [class="libreoffice-startcenter"] $workspace3
+assign [class="libreoffice-writer"] $workspace3
+assign [class="libreoffice-calc"] $workspace3
+assign [class="libreoffice-impress"] $workspace3
+assign [class="Soffice"] $workspace3
+# workspace4:- IDE
+assign [class="bluej-Boot"] $workspace4
+# workspace5:- Video
+assign [class="vlc"] $workspace5
+assign [class="Vlc"] $workspace5
+assign [class="Totem"] $workspace5
+assign [class="smplayer"] $workspace5
+assign [class="mpv"] $workspace5
+assign [class="Gnome-mplayer"] $workspace5
+# workspace6:- Editor 
+assign [class="Gvim"] $workspace6
+# workspace7:- File Manager
+assign [class="Pcmanfm"] $workspace7
+assign [class="Thunar"] $workspace7
+# workspace8:- Torrent
+assign [class="Deluge"] $workspace8
+assign [class="Transmission-gtk"] $workspace8
+# workspace9:- Music
+assign [class="Audacious"] $workspace9
+assign [class="Clementine"] $workspace9
+# workspace10:- PDF
+assign [class="Evince"] $workspace10
+assign [class="MuPDF"] $workspace10
+assign [class="Zathura"] $workspace10
+# workspace11:- TeamViewer
+assign [class="TeamViewer"] $workspace11
+# workspace12:- RSS
+assign [class="Liferea"] $workspace12
+# workspace13:- Scratchpad
+assign [class="Tomboy"] $workspace13
+# workspace14:- Graphics
+assign [class="Gpicview"] $workspace14
+assign [class="Pinta"] $workspace14
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+# Define colors for bar
+
+# Workspace active background color
+set $wsabc                  #404552
+# Arc   #404552
+# Mint  #444444
+
+# Workspace border color
+set $wsbc                   #535353
+
+# Active text color
+set $atc    			    #D3DAE3
+# Arc   #D3DAE3
+# Mint  #DFDFDF
+
+# Inactive text color
+set $itc                	#7C818C
+# Arc   #7C818C
+# Mint  #7F7F7F
+
+# Urgent text color
+set $utc                    #ffffff
+
+# Urgent background color
+set $ubc            		#CC575D
+# Arc   #CC575D
+# Mint  #902424
+
+bar {
+        status_command i3status -c $HOME/.config/i3/.i3status.conf 
+
+        colors{
+            background $wibc
+            separator $atc
+            statusline $atc
+
+            #			        border			    background		    text
+            focused_workspace	$wsbc               $wsabc              $atc
+    
+            active_workspace    $wsbc               $wsabc              $utc
+		
+            inactive_workspace	$wibc               $wibc               $itc
+		
+            urgent_workspace	$ubc                $ubc                $utc
+        }
+}
+
+# Define colors for windows
+
+# Window active background color
+set $wabc			        #404552
+# Arc   #404552
+# Mint  #404040
+
+# Window border color
+set $wbc                    #262932
+# Arc   #262932
+# Mint  #262626
+
+# Window inactive background color
+set $wibc		            #383C4A
+# Arc   #383C4A
+# Mint  #383838
+
+# Window colors
+#				            border			    background		    text                    indicator
+client.focused			    $wbc                $wabc               $atc                    #859900
+
+client.unfocused		    $wibc               $wibc               $itc                    #586E75
+
+client.focused_inactive	    $wibc               $wibc               $utc                    #6C71C4
+
+client.urgent			    $ubc                $ubc                $utc                    #DC322F
+
+# Disable borders from windows
+hide_edge_borders both
+
+# Set shut down, restart, hibernate, exit and suspend features
+set $mode_system (l)ogout, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3-msg exit, mode "default"
+	bindsym s exec --no-startup-id $HOME/scripts/system/i3lock.sh && systemctl suspend, mode "default"
+	bindsym h exec --no-startup-id $HOME/scripts/system/i3lock.sh && systemctl hibernate, mode "default"
+	bindsym r exec --no-startup-id systemctl reboot, mode "default"
+	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+	# exit system mode: "Enter" or "Escape"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+x mode "$mode_system"
+
+# Screenshot
+set $print_screen Screenshots: (f)ullscreen, 5s (d)elay, select (p)ortion
+
+mode "$print_screen" {
+	bindsym f exec maim $HOME/Pictures/maim/$(date +%F-%T).png, mode "default"
+	bindsym d exec maim $HOME/Pictures/maim/$(date +%F-%T).png -d 5 && notify-send "Screenshot saved", mode "default"
+	bindsym p exec maim $HOME/Pictures/maim/$(date +%F-%T).png -s, mode "default"
+
+	# exit system mode: "Enter" or "Escape"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym Print mode "$print_screen"
+
+# Custom keybindings for screenlock using i3lock
+bindsym $mod+l exec $HOME/scripts/system/i3lock.sh
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Multimedia keys
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+
+# Touchpad controls
+bindsym XF86Tools exec $HOME/scripts/system/touchpad.sh # toggle touchpad
+
+# Capslock and Numlock
+bindsym Caps_Lock exec sleep 0.2 && notify-send -u critical -t 5 "$(bash $HOME/scripts/system/key-settings.sh)"
+bindsym Num_Lock exec sleep 0.2 && notify-send -u critical -t 5 "$(bash $HOME/scripts/system/key-settings.sh)"
+
+# Floating window
+for_window [class="Galculator"] floating enable
+
+# Screen off Fn key
+bindcode 253 exec --no-startup-id xset dpms force off
+
+# Audacious
+bindsym $mod+comma exec playerctl previous
+bindsym $mod+period exec playerctl next
+bindsym $mod+p exec playerctl play-pause
+
+# Sreen brightness controls
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym ctrl+F1 exec xbacklight -set 0
+bindsym ctrl+F2 exec xbacklight -set 50
+bindsym ctrl+F3 exec xbacklight -set 100
+
+# Wifi Fn key
+bindsym XF86WLAN exec $HOME/scripts/system/wifi.sh # toggle wifi
+
+# Reload i3bar if not visible after a logout and login
+bindsym $mod+BackSpace exec $HOME/scripts/system/i3bar.sh
+
+# Fullscreen window
+#for_window [class="Gvim"] fullscreen enable
+
+# Conky
+#exec_always sleep 20 && nice 19 $(conky -c $HOME/.conky/noobslab/.conkyrc)
+
+# TO-DO CONKY
+#exec_always sleep 10 && nice 19 $(conky -c $HOME/.conky/.conkyrc)
+
+# Run nm-applet
+#exec_always nm-applet
+
+# Run clipboard manager
+#exec_always parcellite
+
+# Disable touchpad tap
+#exec $HOME/scripts/system/tap-touchpad.sh
+
+# Compton
+#exec_always compton --config $HOME/.config/i3/compton.conf -b
+
+# To keep the wallpaper constant
+#exec_always feh --bg-scale $HOME/Pictures/Wallpaper/rAXHzK.jpg
+
+# For mounting drives as user in Thunar
+#exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

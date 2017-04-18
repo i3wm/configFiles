@@ -1,0 +1,31 @@
+PREFERENCES
+
+Customize Look and Feel:- lxappearance
+Default applications for LXSession:- lxsession-default-apps
+Desktop preferences:- pcmanfm (not required)
+Disks:- gnome-disks
+Fcitx Configuration:- fcitx-config-gtk
+Keyboard and Mouse:- lxinput
+Language Support:- gnome-language-selector
+Light Locker Settings:- light-locker-settings.py
+Monitor Settings:- lxrandr
+Network Connections:- nm-connection-editor
+Openbox Configuration Manager:- obconf
+OpenJDK Java 8 Policy Tool:- sun-awt-X11-XFramePeer | sun-security-tools-policytool-PolicyTool
+Power Manager - xfce4-power-manager-settings
+Software & Updates - software-properties-gtk
+
+SYSTEM TOOLS
+
+GDebi Package Installer:- gdebi-gtk
+LightDM GTK+ Greeter settings:- lightdm-gtk-greeter-settings
+Lubuntu Software Center:- lubuntu-software-center
+Network:- network-admin
+NTFS Configuration Tool:- ntfs-config
+Printers:- system-config-printer.py
+Software Updater:- update-manager
+Startup Disk Creator:- usb-creator-gtk
+System Profiler and Benchmark:- hardinfo
+Task Manager:- lxtask
+Time and Date:- time-admin
+Users and Groups:- users-admin

@@ -1,0 +1,277 @@
+# Step-wise evaluation of Arch Linux installation
+
+1. Base packages
+	- base-devel (for AUR)
+	- base
+
+2. Display Server packages
+	- xorg-server
+	- xorg-server-utils (not required)
+	- xorg-xinit (not required if lightdm installed)
+	- xf86-input-keyboard (not required)
+	- xf86-input-mouse (not required)
+	- xf86-video-intel
+
+3. Deskop environment
+	- i3-wm
+	- i3lock
+	- i3status
+	- {grub & os-prober}/{refind-efi}
+    - rofi
+	- {rxvt-unicode-patched & xsel (for copy-paste in urxvt)}/{terminator}
+	- xf86-input-synaptics
+	- ufw
+
+4. Common packages
+	- gamin (not required)
+	- gksu
+	- gnome-icon-theme (not required)
+	- gvfs-mtp
+	- polkit (installed automatically)
+	- poppler (not required)
+	- python2-xdg (not required)
+	- ntfs-3g
+	- xdg-user-dirs (not required)
+	- xdg-utils (not required)
+	- iw
+	- wpa_supplicant
+	- dialog (remove after configuring NetworkManager.service)
+    - xorg-xrdb (required to 'xrdb ~/.Xresources')
+    - net-tools (for ifconfig)
+	- networkmanager
+	- network-manager-applet
+
+5. Display manager
+	- lightdm
+	- lightdm-gtk-greeter
+	OR
+	- vim ~/.xinitrc
+	- Add these lines to the file:
+		exec i3
+	- vim ~/.config/i3/config
+	- Add these lines to the top of the file:
+		exec xrdb ~/.Xresources
+
+6. Enable ufw
+	- sudo ufw enable
+	- sudo systemctl enable ufw.service
+	- sudo systemctl start ufw.service
+	- systemctl reboot
+
+7. Edit grub
+	- sudo vim /etc/default/grub
+	- Edit these lines:
+		GRUB_DEFAULT=saved
+		GRUB_SAVEDEFAULT=true
+	- No quiet splash
+	- sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+8. Sound drivers
+	- alsa-plugins (not required)
+	- alsa-utils
+	- pulseaudio
+	- pavucontrol
+
+9. Additional packages
+	- chromium
+	- zsh
+	- gvim
+	- xorg-utils (xprop)
+	- {dunst}/{xfce4-notifyd}
+	- conky
+	- wget
+	- unzip
+	- mc
+	- cronie
+	- git
+	- tlp
+	- feh
+	- compton
+	- parcellite
+	- lxappearance
+	- acpi (for low battery notification)
+	- deluge
+	- python2-gobject2 (deluge dependency)
+	- pygtk (deluge dependency)
+	- parted
+	- dosfstools
+	- maim
+	- slop (maim dependency for `-s`)
+    - ncdu
+    - hunspell
+    - hunspell-en
+
+10. Enable NetworkManager.service
+	- sudo systemctl enable NetworkManager.service
+	- sudo systemctl start NetworkManager.service
+	- systemctl reboot
+	- sudo pacman -Rns dialog 
+
+11. Configure fonts
+	- FontAwesome (AUR)
+	- Monaco (AUR)
+    - ttf-ms-fonts
+    - ttf-dejavu
+    - ttf-lohit-font
+    - ttf-font-icons (AUR)
+
+12. Setup 'oh my zsh' also for 'root'.
+
+13. For wrong time
+	- sudo pacman -S ntp
+	- ntpd -qg
+	- hwclock --systohc
+
+14. Setup 'yaourt'
+	- sudo pacman -S --needed base-devel git wget yajl
+	- git clone https://aur.archlinux.org/package-query.git
+	- cd package-query/
+	- makepkg -si
+	- cd ..
+	- git clone https://aur.archlinux.org/yaourt.git
+	- cd yaourt/
+	- makepkg -si
+	- cd ..
+	- sudo rm -rf yaourt/ package-query/
+
+15. Setup libreoffice
+	- sudo yaourt -S libreoffice-fresh
+	- sudo vim /etc/profile.d/libreoffice-fresh.sh
+	- uncomment relevant lines
+	- reboot
+
+16. Enable cronie
+	- sudo systemctl enable cronie.service
+	- sudo systemctl start cronie.service
+	- reboot
+
+17. Remove user list from lightdm
+	- sudo mkdir -p /etc/lightm/lightdm.conf.d
+	- sudo vim /etc/lightdm/lightdm.conf.d/50-my-custom-config.conf
+	- Add the lines
+		[SeatDefaults]
+		greeter-hide-users=true
+		greeter-show-manual-login=true
+	- sudo service lightdm restart or a reboot
+
+18. Setup zeegaree
+	- yaourt -S python-pyside python-dbus python-gobject
+
+19. Setup to mount any drive through file-manager
+	- Install
+		- gvfs-mtp (for Android device)
+		- udisks2
+	- Edit /usr/share/polkit-1/actions/org.freedesktop.udisks2.policy
+		- Under "<action id="org.freedesktop.udisks2.filesystem-mount">".
+			- Change "<allow_active>auth_admin_keep</allow_active>" to "<allow_active>yes</allow_active>".
+        - Under "<action id="org.freedesktop.udisks2.filesystem-mount-system">"
+            - Change "<allow_active>auth_admin_keep</allow_active>" to "<allow_active>yes</allow_active>".
+	- Add "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" to list of autostart applications.
+
+20. Setup mount to /media instead of /run/
+    - Create file '/etc/udev/rules.d/99-udisks2.rules'
+    - Add these lines to it:
+        # UDISKS_FILESYSTEM_SHARED
+        # ==1: mount filesystem to a shared directory (/media/VolumeName)
+        # ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)
+        # See udisks(8)
+        ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
+
+21. Hibernation
+    - Edit /etc/mkinitcpio.conf
+    - Add 'resume' to the end of the line of HOOKS.
+    - Run 'mkinitcpio -p linux'.
+    - Edit /etc/default/grub and append the following options to other options (if existing):-
+        GRUB_CMDLINE_LINUX_DEFAULT="resume=/dev/sda5" 
+      OR
+      Edit '/boot/grub/grub.cfg' to append 'resume=UUID=xxx' OR 'resume=/dev/sdXY' to the line 'linux /boot/linux-vmlinuz'
+
+22. Set VIM as global editor:- 
+    - Open /etc/profile and add these lines to the bottom of the file:-
+        # Set editor globally to vim
+        export EDITOR=vim
+
+23. For qt5 apps such as 'Smplayer' to accept gtk theme:-
+    - Install qt5-styleplugins from aur.
+    - Install qt5ct.
+    - Append these lines to /etc/environment.
+        QT_STYLE_OVERRIDE=gtk2
+        QT_QPA_PLATFORMTHEME=qt5ct
+
+24. Configuring Samba:-
+    - Follow the wiki.
+    - In /etc/samba/smb.conf comment using ; the lines for [homes]. Otherwise, the user's home directory will be shared.
+    - Install thunar-share from AUR.
+
+25. Change Arc blue:-
+    - git arc colora
+    - uncomment dark assets in 3rd script
+    - build everything
+    - If there are any errors
+        sudo cp -r /usr/share/themes/Arc-Dark/gtk-2.0/assets/assets-dark/* /usr/share/themes/Arc-Dark/gtk-2.0/assets/ && sudo rm -rf /usr/share/themes/Arc-Dark/gtk-2.0/assets/assets-dark
+
+26. Mint Y colors:-
+    Selection green - #819A67
+    Selection green text - #FBFCFA
+    Window color - #404040
+    Menu bar color - #2F2F2F
+    Text color - #DADADA
+    Text inactive color - #7F7F7F
+    Context menu highlight  - #444444
+    Context menu highlight border - #535353
+    Context menu background color - # 383838
+    Border - #262626
+
+27. Multimedia-codecs:-
+    - Install gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
+
+28. Lock screen before suspend on laptop lid close
+    - sudo vim /etc/systemd/system/suspend@.service
+    - cp ~/scripts/system/i3lock.sh /usr/bin/i3lock.sh
+    - Add these lines to the file:-
+        [Unit]
+        Description=Lock screen before suspend
+        Before=sleep.target
+
+        [Service]
+        User=%I
+        Type=forking
+        Environment=DISPLAY=:0
+        ExecStart=/usr/bin/i3lock.sh
+
+        [Install]
+        WantedBy=sleep.target
+    - systemctl enable suspend@<username>
+    - reboot system
+
+28. Lock screen before hibernate on inactivity
+    - sudo vim /etc/systemd/system/hibernate@.service
+    - cp ~/scripts/system/i3lock.sh /usr/bin/i3lock.sh
+    - Add these lines to the file:-
+        [Unit]
+        Description=Lock screen before suspend
+        Before=hibernate.target
+
+        [Service]
+        User=%I
+        Type=forking
+        Environment=DISPLAY=:0
+        ExecStart=/usr/bin/i3lock.sh
+
+        [Install]
+        WantedBy=hibernate.target
+    - systemctl enable hibernate@<username>
+    - reboot system
+
+29. For better font rendering in java applications (such as Java)
+    - Add this line to /etc/environment
+        _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
+
+30. Setup HP-Printer
+    - Install:-
+        - hplip
+        - cups
+        - python-pyqt5
+        - gtk3-print-backends
+    - Start cups service:-
+        - systemctl enable cups-browsed.service

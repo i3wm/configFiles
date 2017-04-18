@@ -1,0 +1,9 @@
+Connect to wifi from terminal
+
+1.	iwconfig
+
+2.	wpa_passphrase "ssid" "password" > /etc/wpa_supplicant.conf
+
+3.	sudo wpa_supplicant -B -iwlan0 -c/etc/wpa_supplicant.conf
+
+4.	sudo dhclient wlan0

@@ -1,0 +1,20 @@
+1.	su
+
+2.	iwconfig
+
+3.	chmod 0600 /etc/network/interfaces
+
+4.	nano '/etc/network/interfaces'
+
+5.	Add these lines:
+
+###
+auto wlan0
+iface wlan0 inet dhcp
+        wpa-ssid "myssid"
+        wpa-psk "your-password"
+###
+
+6.	Save and exit.
+
+7.	ifup wlan0

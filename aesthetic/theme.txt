@@ -1,0 +1,5 @@
+To install a theme you manually downloaded:
+
+1.	Copy/move the themes folder to '/usr/share/themes/'
+
+2.	Open 'lxappearance' and choose your favorite theme, then click on 'Apply'.

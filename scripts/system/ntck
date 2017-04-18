@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Check if ntfs-3g is installed
+if ! which ntfs-3g > /dev/null; then 
+	sudo apt-get install ntfs-3g -y; 
+fi
+
+# Check if ntfs-config is installed
+if ! which ntfs-config > /dev/null; then 
+	sudo apt-get install ntfs-config -y; 
+fi
+
+# Check if testdisk is installed
+if ! which testdisk > /dev/null; then 
+	sudo apt-get install testdisk -y; 
+fi
+
+sudo fsck $1
+
+exit 0

@@ -1,0 +1,38 @@
+! Run this command to generate a config
+! rofi -dump-xresources > rofi-example.config
+
+! Enable color in rofi
+
+rofi.color-enabled: true
+
+! State:           'bg',     'itc',     'bgalt',    'ahlbg',    'atc'
+rofi.color-normal: #2f343f,  #7C818C,   #2f343f,    #2f343f,    #819A67
+
+! Mint Y colors
+! rofi.color-normal: #404040,  #999999,  #404040,  #2f2f2f,  #f3f4f5
+! Selection green - #819A67
+! Window color - #404040
+! Menu bar color - #2F2F2F
+! Text inactive color - #7D7979
+! Text color - #D7CFCF
+
+!                  'background', 'border'
+rofi.color-window: #2f343f,      #2f343f
+
+! "Number of lines" Set from: Default
+rofi.lines:                          1
+
+! "Number of columns" Set from: Default
+rofi.columns:                        5
+
+! "Window width" Set from: Default
+rofi.width:                          100
+
+! "Location on screen" Set from: Default
+rofi.location:                       2
+
+! "Separator style (none, dash, solid)" Set from: Default
+rofi.separator-style:                none
+
+! "Font to use" Set from: Default
+rofi.font:                           Matchbook Bold 15

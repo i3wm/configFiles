@@ -1,0 +1,170 @@
+#compdef audtool
+ 
+_audtool() { 
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+ 
+    _arguments \
+        '1: :->csi'\
+        '1: :->pc'\
+	'1: :->plc'\
+	'1: :->mplc'\
+	'1: :->pqc'\
+	'1: :->vce'\
+	'1: :->m'
+ 
+    case $state in
+    csi)
+        _arguments '1:Current song information:(
+		--current-song
+		--current-song-filename 
+		--current-song-length 
+		--current-song-length-seconds
+		--current-song-length-frames
+		--current-song-output-length
+		--current-song-output-length-seconds
+		--current-song-output-length-frames
+		--current-song-bitrate
+		--current-song-bitrate-kbps
+		--current-song-frequency
+		--current-song-frequency-khz
+		--current-song-channels
+		--current-song-tuple-data
+		--current-song-info)'
+    ;;
+    pc)
+	_arguments '1:Playback commands:(
+		--playback-play
+		--playback-pause
+		--playback-playpause
+		--playback-stop
+		--playback-playing
+		--playback-paused
+		--playback-stopped
+		--playback-status
+		--playback-seek
+		--playback-seek-relative
+		--playback-record
+		--playback-recording)'
+    ;;
+    plc)
+	_arguments '1:Playlist commands:(
+		--playlist-advance
+		--playlist-reverse
+		--playlist-addurl
+		--playlist-insurl
+		--playlist-addurl-to-new-playlist
+		--playlist-delete
+		--playlist-length
+		--playlist-song
+		--playlist-song-filename
+		--playlist-song-length
+		--playlist-song-length-seconds
+		--playlist-song-length-frames
+		--playlist-tuple-data
+		--playlist-display
+		--playlist-position
+		--playlist-jump
+		--playlist-clear
+		--playlist-auto-advance-status
+		--playlist-auto-advance-toggle
+		--playlist-repeat-status
+		--playlist-repeat-toggle
+		--playlist-shuffle-status
+		--playlist-shuffle-toggle
+		--playlist-stop-after-status
+		--playlist-stop-after-toggle)'
+    ;;
+    mplc)
+	_arguments '1:More playlist commands:(
+		--number-of-playlists
+		--current-playlist
+		--play-current-playlist
+		--set-current-playlist
+		--current-playlist-name
+		--set-current-playlist-name
+		--new-playlist
+		--delete-current-playlist)'
+    ;;
+    pqc)
+	_arguments '1:Playlist queue commands:(
+		--playqueue-add
+		--playqueue-remove
+		--playqueue-is-queued
+		--playqueue-get-queue-position
+		--playqueue-get-list-position
+		--playqueue-length
+		--playqueue-display
+		--playqueue-clear)'
+    ;;
+    vce)
+	_arguments '1:Volume control and equalizer:(
+		--get-volume
+		--set-volume
+		--equalizer-activate
+		--equalizer-get
+		--equalizer-set
+		--equalizer-get-preamp
+		--equalizer-set-preamp
+		--equalizer-get-band
+		--equalizer-set-band)'
+    ;;
+    m)
+	_arguments '1:Miscellanous:(
+		--mainwin-show
+		--filebrowser-show
+		--jumptofile-show
+		--preferences-show
+		--about-show
+		--version
+		--plugin-is-enabled
+		--plugin-enable
+		--shutdown
+		--help)'
+    ;;
+    esac
+}
+ 
+_audtool "$@"
+
+======================================================================
+
+#compdef hello
+ 
+_hello() { 
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+ 
+    _arguments \
+        '1: :->country'\
+        '*: :->city'
+ 
+    case $state in
+    country)
+        _arguments '1:Countries:(France Germany Italy)'
+    ;;
+    *)
+        case $words[2] in
+        France)
+            compadd "$@" Paris Lyon Marseille
+        ;;
+        Germany)
+            compadd "$@" Berlin Munich Dresden
+        ;;
+        Italy)
+            compadd "$@" Rome Napoli Palermo
+        ;;
+        *)
+            _files 
+        esac
+    esac
+}
+ 
+_hello "$@"
+
+======================================================================
+
+file)
+    	_arguments '*:filename:_files'
+	    ;;
+

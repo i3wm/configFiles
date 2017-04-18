@@ -1,0 +1,7 @@
+# To setup vim to show up in 'select-editor' menu (Debian)
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 100
+
+# Now, select your editor from either of these options
+sudo update-alternatives --config editor
+OR
+select-editor

@@ -1,0 +1,7 @@
+scrot
+xfburn
+gpick
+mtpaint
+abiword
+gnumeric
+xpad

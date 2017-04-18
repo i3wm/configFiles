@@ -1,0 +1,108 @@
+#compdef audtool
+ 
+_audtool() { 
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+ 
+    _arguments \
+        '1: :->csi'\
+	'2: :->file'
+
+    case $state in
+    csi)
+        _arguments '1: :(
+		--current-song
+		--current-song-filename 
+		--current-song-length 
+		--current-song-length-seconds
+		--current-song-length-frames
+		--current-song-output-length
+		--current-song-output-length-seconds
+		--current-song-output-length-frames
+		--current-song-bitrate
+		--current-song-bitrate-kbps
+		--current-song-frequency
+		--current-song-frequency-khz
+		--current-song-channels
+		--current-song-tuple-data
+		--current-song-info
+		--playback-play
+		--playback-pause
+		--playback-playpause
+		--playback-stop
+		--playback-playing
+		--playback-paused
+		--playback-stopped
+		--playback-status
+		--playback-seek
+		--playback-seek-relative
+		--playback-record
+		--playback-recording
+		--playlist-advance
+		--playlist-reverse
+		--playlist-addurl
+		--playlist-insurl
+		--playlist-addurl-to-new-playlist
+		--playlist-delete
+		--playlist-length
+		--playlist-song
+		--playlist-song-filename
+		--playlist-song-length
+		--playlist-song-length-seconds
+		--playlist-song-length-frames
+		--playlist-tuple-data
+		--playlist-display
+		--playlist-position
+		--playlist-jump
+		--playlist-clear
+		--playlist-auto-advance-status
+		--playlist-auto-advance-toggle
+		--playlist-repeat-status
+		--playlist-repeat-toggle
+		--playlist-shuffle-status
+		--playlist-shuffle-toggle
+		--playlist-stop-after-status
+		--playlist-stop-after-toggle
+		--number-of-playlists
+		--current-playlist
+		--play-current-playlist
+		--set-current-playlist
+		--current-playlist-name
+		--set-current-playlist-name
+		--new-playlist
+		--delete-current-playlist
+		--playqueue-add
+		--playqueue-remove
+		--playqueue-is-queued
+		--playqueue-get-queue-position
+		--playqueue-get-list-position
+		--playqueue-length
+		--playqueue-display
+		--playqueue-clear
+		--get-volume
+		--set-volume
+		--equalizer-activate
+		--equalizer-get
+		--equalizer-set
+		--equalizer-get-preamp
+		--equalizer-set-preamp
+		--equalizer-get-band
+		--equalizer-set-band
+		--mainwin-show
+		--filebrowser-show
+		--jumptofile-show
+		--preferences-show
+		--about-show
+		--version
+		--plugin-is-enabled
+		--plugin-enable
+		--shutdown
+		--help)'
+    ;;
+    file)
+	_arguments '*:filename:_files'
+    ;;
+    esac
+}
+ 
+_audtool "$@"
