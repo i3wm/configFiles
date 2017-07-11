@@ -1,5 +1,8 @@
 #compdef rclone
- 
+
+###########################################################################
+# Moved to zsh-completions (https://github.com/zsh-users/zsh-completions) #
+###########################################################################
 _rclone() { 
 	local state
 	
