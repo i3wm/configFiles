@@ -4,6 +4,7 @@ set encoding=utf-8
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/my_snippets/
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -46,10 +47,11 @@ Plugin 'Yggdroot/indentLine'
 " vertical line indentation
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#FFFFFF'
-let g:indentLine_char = '┆'
-"let g:indentLine_char = '│'
+"let g:indentLine_char = '┆'
+let g:indentLine_char = '│'
 
 Plugin 'ervandew/supertab'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -64,29 +66,47 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" Custom user settings
+
+" Show line number
 set number
+
+" Syntax highlighting with different colors
 syntax on
+
+" Colorscheme for dark solarized
 set background=dark
-se t_Co=256
-set t_ut=
-let g:solarized_termcolors=256
+se t_Co=16
+let g:solarized_termcolors=16
 colorscheme solarized
+
+" Settings such that the colorscheme don't jumble up on scroll
+set t_ut=
+
+" Settings to enable moving cursor on mouse-click
 set mouse=a
+
+" Some options for minimal GVIM UI
 "set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-"indentLine for tab
-"highlight SpecialKey guibg=#002B36 ctermbg=234
-"set list lcs=tab:\│\ 
-"tab = 4 spaces
+
+" To set tab = 4 spaces
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-"Right-click gvim
+
+" Right-click GVIM
 set mousemodel=popup
-"Set-font
+
+" Set-font in GVIM
 if has('gui_running')
     set guifont=Monaco\ 10
 endif
+
+" To tell a difference between Insert mode and Normal mode
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
